@@ -75,10 +75,14 @@ img {
 .signUp-background {
     background: linear-gradient(33deg,rgba(116, 240, 242, 0.78) 0%, rgba(237, 221, 166, 1) 100%);
 }
+
+.signUp-header {
+    background: linear-gradient(57deg,rgba(162, 231, 207, 0.78) 0%, rgba(237, 221, 166, 1) 100%);
+}
 .signUp {
     background: radial-gradient(circle,rgba(228, 247, 247, 0.39) 0%, rgba(245, 240, 228, 0.24) 100%);
     justify-content: center;
-    height: 1000px;
+    height: 700px;
     width: 700px;
 }
 
@@ -88,6 +92,17 @@ img {
     border-radius:50px;
     background-color: rgb(79, 76, 76);
     color: white;
+    text-align: center;
+    font-size: 20px;
+}
+
+.signUp-input {
+    height: 70px;
+    width: 200px;
+    border-radius:50px;
+    background-color: rgba(215, 236, 201, 0.365);
+    color: black;
+    border: none;
     text-align: center;
     font-size: 20px;
 }

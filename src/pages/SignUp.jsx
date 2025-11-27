@@ -1,6 +1,8 @@
 import React from "react";
 
+import Header from "../components/Header";
 import AccountInput from "../components/AccountInput";
+
 
 export default function SignUp() {
     const inputs = [
@@ -23,10 +25,29 @@ export default function SignUp() {
             "name": "password",
             "type": "password",
             "placeholder": "Password"
+        },
+        {
+            "name": "confirmPassword",
+            "type": "password",
+            "placeholder": "Confirm Password"
         }
     ];
 
+    const create = () => {
+        console.log("hello");
+    }
+    const buttons = [
+        {
+            "text": "Create",
+            "link": null,
+            "action": create
+        }
+    ]
+
     return(
-        <AccountInput inputs={inputs} buttons={[]} page="signUp"/>
+        <>
+            <Header text="Create a New Account" userBox={false} style="signUp-header"/>
+            <AccountInput inputs={inputs} buttons={buttons} page="signUp"/>
+        </>
     )
 }

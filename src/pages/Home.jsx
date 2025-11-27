@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 export default function Home() {
     return (
         <>
-            <Header />
+            <Header text="Scheduler" userBox={true}/>
             <Outlet />
         </>
     )
