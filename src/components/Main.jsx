@@ -1,5 +1,7 @@
 export default function Main() {
     return(
-        <body>this is main</body>
-    );
+        <>
+            <h1>this is main</h1>
+        </>
+    )
 }

@@ -1,0 +1,111 @@
+$primary-color: #531CB3;
+$secondary-color: #944BBB;
+$tertiary-color: #AA7BC3;
+$quaternary-color: #CC92C2;
+$quinary-color: #DBA8AC;
+// https://coolors.co/531cb3-944bbb-aa7bc3-cc92c2-dba8ac
+$primary-color-light: #8A56E5;
+$secondary-color-light: #B989D2;
+$tertiary-color-light: #C7A9D7;
+$quaternary-color-light: #DEB9D8;
+$quinary-color-light: #E8C7CA;
+
+* {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 400;
+}
+
+body {
+    margin: auto;
+    background: $quaternary-color;
+    // background: linear-gradient(157deg,rgba(83, 28, 179, 1) 0%, rgba(222, 185, 216, 1) 100%);
+}
+
+@mixin flex($gap: 1em, $direction: row) {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: $gap;
+    justify-content: space-between;
+    flex-direction: $direction;
+}
+
+header {
+    // @include flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.051);
+    
+    h1 {
+        flex-grow: 1;
+        justify-self: center;
+        font-weight: 700;
+    }
+
+    div {
+        justify-self: end;
+    }
+
+}
+
+.user-box {
+    @include flex;
+    padding-right: 15px;
+}
+
+.account-buttons {
+    background: $secondary-color-light;
+    border: none;
+    border-radius: 10px;
+    width: 70px;
+    font-weight: 500;
+}
+
+.account-buttons:hover {
+    background: $tertiary-color;
+}
+
+.account-form {
+    @include flex(15px, column);
+    height: 70%;
+    justify-content: center;
+    font-size: 36px;
+
+    h1 {
+        font-weight: 300;
+    }
+
+    button {
+        background: $quinary-color-light;
+        border-radius: 50px;
+        width: 200px;
+        height: 50px;
+        font-size: 20px;
+        border: none;
+    }
+
+    button:hover {
+        font-weight: bolder;
+        background: $quinary-color;
+    }
+}
+
+.account-input {
+    text-align: center;
+    width: 500px;
+    height: 70px;
+    font-size: 24px;
+    outline: none;
+    border-width: 0 0 2px;
+    border-color: rgb(22, 19, 19);
+    background: none;
+
+    &-multiple {
+        @extend .account-input;
+        width: 230px;
+        margin-right: 20px;
+        margin-left:20px;
+        flex: 1;
+    }
+}

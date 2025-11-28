@@ -1,13 +1,17 @@
-import React from "react";
 import { Link } from "react-router";
+export default function UserBox(props) {
+    
+    const buttons = props.buttons.map((button) => 
+        <Link to={button.link}>
+            <button onClick={button.action} className={props.class}>
+                {button.text}
+            </button>
+        </Link>
+    );
 
-export default function UserBox() {
     return(
-        <div className="flex">
-            <img src="../assets/UserIcon.png" alt="Profile Picture"></img>
-            <Link to="/login">
-                <button className="login-button">SIGN UP/LOGIN</button>
-            </Link>
+        <div className="user-box">
+            {buttons}
         </div>
     );
 }

@@ -1,12 +1,26 @@
-import Header from "../components/Header.jsx";
-
 import { Outlet } from "react-router";
+import Header from "../components/Header";
 
 export default function Home() {
-    return (
+
+    const buttons = [
+        {
+            "text": "SIGN UP",
+            "action" : null,
+            "link": "accounts/create"
+        },
+        {
+            "text": "LOGIN",
+            "action" : null,
+            "link": null
+        }
+    ];
+
+
+    return(
         <>
-            <Header text="Scheduler" userBox={true}/>
+            <Header buttons={buttons} class="account-buttons"/>
             <Outlet />
         </>
-    )
+    );
 }
