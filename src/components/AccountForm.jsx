@@ -1,5 +1,9 @@
+import React from "react";
 function setPasswordInput(password, index) {
     const name = password.toLowerCase().replace(" ", "");
+
+    const pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+    
     return (
         <input 
             className="account-input" 
@@ -7,8 +11,9 @@ function setPasswordInput(password, index) {
             id={name} 
             type="password" 
             placeholder={password} 
+            pattern={pattern}
             key={index}
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            onFocus={event => console.log(event)}>
         </input>
     )
 }
@@ -33,7 +38,7 @@ function setInputFields(inputProps) {
                         )})}
                 </div>
             )
-        } else if (input === "Password" || input === "Confirm Password" ) {
+        } else if (input === "Password") {
             return (
                 setPasswordInput(input, index)
             )
@@ -44,7 +49,7 @@ function setInputFields(inputProps) {
                     className="account-input" 
                     name={name} 
                     id={name} 
-                    type="text" 
+                    type={input === "Confirm Password" ? "password" : "text"} 
                     placeholder={input} 
                     key={index}>
                 </input>)}}
@@ -52,7 +57,9 @@ function setInputFields(inputProps) {
 }
 
 export default function AccountForm(props) {
+    
     const inputs = setInputFields(props.inputs);
+    
     return (
         <>
             <form className="account-form">
