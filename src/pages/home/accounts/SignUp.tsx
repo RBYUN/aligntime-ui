@@ -8,16 +8,30 @@ import Header from "../../../components/Header.tsx";
 import { sections } from "../data/index.ts";
 
 import type { Button } from "../../../types/index.ts";
+import PasswordPolicy from "../../../components/PasswordPolicy.tsx";
 
 export default function SignUp() {
 
-    let accountSchema = object({
-        firstName: string().required(),
-        lastName: string().required(),
-        email: string().email(),
-        password: string().required(),
-        confirmPassword: string().required()
-    });    
+    const [showPolicy, setShowPolicy] = useState(false);
+    const [currentPass, setCurrentPass] = useState("");
+    const [isGoodLen, setIsGoodLen] = useState(false);
+    const [hasUpperCase, setHasUpperCase] = useState(false);
+    const [hasLowerCase, setHasLowerCase] = useState(false);
+    const [hasDigit, setHasDigit] = useState(false);
+    const [hasSpecialChar, setHasSpecialChar] = useState(false);
+    const digitRegex: RegExp = /\d/;
+    const specialCharsRegex : RegExp = /[@$!%*?&]/;
+
+    function setPasswordInput(event: React.ChangeEvent<HTMLInputElement>): void {
+        const { value } = event.currentTarget;
+        setCurrentPass(value);
+        setIsGoodLen(value.length >= 8);
+        setHasUpperCase(value !== value.toLowerCase());
+        setHasLowerCase(value !== value.toUpperCase());
+        setHasDigit(digitRegex.test(value));
+        setHasSpecialChar(specialCharsRegex.test(value));
+}
+       
     
     type FormValues = {
         firstName: string,
@@ -32,9 +46,14 @@ export default function SignUp() {
     console.log(errors)
 
     if (isSubmitting && errors) {
-        toast.error("All fields need to be filled out");
+        if (errors?.firstName?.type === "required" || 
+            errors?.lastName?.type === "required" || 
+            errors?.email?.type === "required" || 
+            errors?.password?.type === "required" || 
+            errors?.confirmPassword?.type === "required") {
+                toast.error("All fields need to be filled out");
+        }
     }
-
     const buttons: Button[] = [{
         text: "LOGIN",
         link: "../login",
@@ -90,7 +109,18 @@ export default function SignUp() {
                     className={inputClass}
                     type="password"
                     placeholder="Password"
+                    onChange={setPasswordInput}
+                    value={currentPass}
+                    onFocus={() => setShowPolicy(true)}
+                    onBlur={() => setShowPolicy(false)}
                 />
+                <PasswordPolicy 
+                    showPolicy={showPolicy} 
+                    isGoodLen={isGoodLen}
+                    hasUpperCase={hasUpperCase}
+                    hasLowerCase={hasLowerCase}
+                    hasDigit={hasDigit}
+                    hasSpecialChar={hasSpecialChar}/>
                 <input {...register("confirmPassword", { 
                     required: true,
                     validate: (val: string) => {
