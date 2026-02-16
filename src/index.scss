@@ -108,7 +108,7 @@ header {
 .account-form {
     @include flex(1rem, column);
     height: 70%;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 36px;
 
     h1 {
@@ -173,7 +173,7 @@ header {
     font-size: 16px;
     list-style-type: none;
     color: rgb(165, 12, 12);
-
+    
     ul {
         list-style-type: none;
     }

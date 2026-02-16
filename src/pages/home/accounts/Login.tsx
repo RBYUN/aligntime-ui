@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router";
 import { toast } from "react-toastify";
+import { sections } from "../data/index.ts";
 
 import Header from "../../../components/Header.tsx";
-import AccountForm from "../../../components/AccountForm.tsx";
 import { useEffect } from "react";
-import type { AccountFormField, Button } from "../../../types/index.ts";
+import type { Button } from "../../../types/index.ts";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -46,21 +47,37 @@ export default function Login() {
         },
     ];
 
-    const inputs: AccountFormField[] = [
-        {
-            text: "Email",
-            id: "email",
-        },
-        {
-            text: "Password",
-            id: "password",
-        },
-    ];
+    const { register, handleSubmit } = useForm();
 
     return(
         <>
-            <Header buttons={buttons}/>
-            <AccountForm inputs={inputs} title="Welcome Back" button="LOGIN" passwordBox={false}/>   
+            <Header buttons={buttons} sections={sections}/>
+            <form
+                className="account-form"
+                onSubmit={
+                    handleSubmit(
+                        (data) => {
+                            console.log(data);
+                })}>
+                <h1>Welcome Back</h1>
+                <input {...register("email", {
+                    required: true,
+                    pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Please enter a valid email address"
+                    }})}
+                    className="account-input"
+                    placeholder="Email"
+                />
+                <input {...register("password", {
+                    required: true
+                })}
+                    className="account-input"
+                    placeholder="Password"
+                />
+                <button>LOGIN</button>
+            </form>
+
         </>
     )
 }
